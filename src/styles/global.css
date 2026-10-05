@@ -1,12 +1,12 @@
 :root {
-  --paper: #edf0f3;
-  --surface: #f6f8fa;
-  --ink: #17202a;
-  --muted: #56616d;
-  --rule: #c9d0d8;
-  --link: #0e6b66;
-  --mark: #f5c542;
-  --mark-soft: #f9dc85;
+  --paper: #fafaf8;
+  --surface: #f1f1ee;
+  --ink: #1b1b1f;
+  --muted: #66666e;
+  --rule: #dcdcd8;
+  --link: #b3261e;
+  --mark: #c8281e;
+  --mark-soft: rgba(200, 40, 30, 0.16);
 
   --sans: 'Bricolage Grotesque', system-ui, sans-serif;
   --serif: 'Newsreader', Georgia, serif;
@@ -26,14 +26,14 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #121820;
-    --surface: #18202a;
-    --ink: #e4e9ee;
-    --muted: #94a1ae;
-    --rule: #2b3541;
-    --link: #62c9c0;
-    --mark: #d6a92a;
-    --mark-soft: rgba(214, 169, 42, 0.35);
+    --paper: #161618;
+    --surface: #1e1e21;
+    --ink: #ececee;
+    --muted: #a0a0a8;
+    --rule: #2f2f34;
+    --link: #ff7a6e;
+    --mark: #ff5a4e;
+    --mark-soft: rgba(255, 90, 78, 0.26);
   }
 }
 
