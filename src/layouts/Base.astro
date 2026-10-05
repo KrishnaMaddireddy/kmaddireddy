@@ -46,6 +46,28 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         <a class="mark-link" href="/rss.xml">RSS</a>
       </p>
     </footer>
+    <p class="toast" role="status" aria-live="polite"></p>
+    <script>
+      // Email links: many computers have no mail app set up, so a mailto: click can do nothing.
+      // Copy the address and confirm it, then still let a configured mail app open.
+      const toast = document.querySelector<HTMLElement>('.toast');
+      let timer: ReturnType<typeof setTimeout> | undefined;
+      document.querySelectorAll<HTMLAnchorElement>('a[href^="mailto:"]').forEach((link) => {
+        link.addEventListener('click', async () => {
+          const address = link.href.replace(/^mailto:/, '').split('?')[0];
+          let copied = false;
+          try {
+            await navigator.clipboard.writeText(address);
+            copied = true;
+          } catch {}
+          if (!toast) return;
+          toast.textContent = copied ? `Email address copied: ${address}` : `Email: ${address}`;
+          toast.classList.add('show');
+          clearTimeout(timer);
+          timer = setTimeout(() => toast.classList.remove('show'), 3500);
+        });
+      });
+    </script>
   </body>
 </html>
 
@@ -56,4 +78,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     color: var(--muted); font-size: var(--step--1);
   }
   .site-footer p { margin: 0; display: flex; flex-wrap: wrap; gap: 1.25rem; }
+  .toast {
+    position: fixed; left: 50%; bottom: 1.5rem; z-index: 20; margin: 0;
+    max-width: calc(100vw - 32px); padding: 0.6rem 1rem; border-radius: 6px;
+    background: var(--ink); color: var(--paper); font-size: 0.9375rem;
+    transform: translate(-50%, 0.75rem); opacity: 0; pointer-events: none;
+    transition: opacity 160ms ease-out, transform 160ms ease-out;
+  }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
 </style>
