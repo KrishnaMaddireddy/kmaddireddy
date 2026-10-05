@@ -1,0 +1,97 @@
+{
+  "items": [
+    {
+      "role": "Head of Data Engineering and Analytics",
+      "company": "Just Slide Media",
+      "location": "Los Angeles, CA",
+      "start": "Dec 2019",
+      "end": "May 2026",
+      "summary": "Built the data and analytics team from scratch for a digital marketing company serving e-commerce clients. Owned strategy, hiring, vendors and delivery.",
+      "highlights": [
+        "Combined Google Ads, Meta, TikTok, Amazon, Shopify, CJ, Impact Radius and other networks into one data lake",
+        "Connected online ad and e-commerce data with offline sales to measure the full funnel",
+        "Built multi-touch attribution models that cut wasted ad spend and lowered acquisition cost",
+        "Executive dashboards in Amazon QuickSight for marketing performance, conversion and revenue"
+      ]
+    },
+    {
+      "role": "Founder, product and developer (part-time)",
+      "company": "PaakData",
+      "location": "",
+      "start": "Jan 2025",
+      "end": "Present",
+      "summary": "Founded and built alone an AI-first stock analytics SaaS covering 12,000+ US stocks and ETFs.",
+      "highlights": [
+        "Natural-language screening engine that shows the filters it applied",
+        "Automated prompt pipeline that tests new prompts against live data and publishes only the ones that pass",
+        "Prototyped AI analyst agents for 28 investing styles, each with its own screens and risk checks"
+      ]
+    },
+    {
+      "role": "VP of Data Engineering, direct-to-consumer digital brands",
+      "company": "FreedomPop",
+      "location": "Los Angeles, CA",
+      "start": "Jan 2013",
+      "end": "Nov 2019",
+      "summary": "Built and led data engineering and analytics for a consumer business selling online in the US, UK, Mexico and Spain, across FreedomPop, Unreal Mobile and later Boost Mobile / Boost Infinite.",
+      "highlights": [
+        "Full-funnel KPIs: acquisition, activation, billing, retention, churn, lifetime value and revenue per user",
+        "Combined 20+ sources, including SAP, CRM, payments, marketing networks and Firebase, into one data lake",
+        "Supply chain and revenue-checking reports for Finance and Operations",
+        "Set data quality, governance and reporting standards on Redshift, BigQuery, Pentaho and Airflow"
+      ]
+    },
+    {
+      "role": "Senior Data Architect",
+      "company": "Machinima",
+      "location": "Los Angeles, CA",
+      "start": "May 2012",
+      "end": "Jan 2013",
+      "summary": "Led data and analytics work on marketing, customer acquisition and financial results for a large digital media network; designed data marts, ETL and executive reporting.",
+      "highlights": []
+    },
+    {
+      "role": "Tech Lead, Business Intelligence",
+      "company": "BeachMint",
+      "location": "Los Angeles, CA",
+      "start": "Feb 2011",
+      "end": "May 2012",
+      "summary": "Built the data warehouse and BI stack (MySQL, Vertica, Pentaho) for a fast-growing online retailer with several subscription brands.",
+      "highlights": [
+        "OLAP cubes and executive dashboards for sales, cohorts, customer behavior and fraud",
+        "Processed terabytes of clickstream and sales data for conversion and merchandising analysis"
+      ]
+    },
+    {
+      "role": "Manager of Engineering, Data Warehouse",
+      "company": "LeadPoint",
+      "location": "Los Angeles, CA",
+      "start": "Nov 2007",
+      "end": "Oct 2010",
+      "summary": "Built the company's first data warehouse for an online lead marketplace, with data marts for pricing, quality and performance. Hired, mentored and led the team.",
+      "highlights": []
+    },
+    {
+      "role": "Senior Software Engineer",
+      "company": "Savings.com",
+      "location": "Los Angeles, CA",
+      "start": "Jan 2005",
+      "end": "Oct 2007",
+      "summary": "First engineer. Designed the original architecture for the coupons and deals site and helped it grow to a $100M acquisition by Cox Target Media.",
+      "highlights": []
+    },
+    {
+      "role": "Software Engineer",
+      "company": "Cisco, TIBCO Finance and Wipro Systems",
+      "location": "",
+      "start": "1996",
+      "end": "2005",
+      "summary": "Enterprise software for finance and networking.",
+      "highlights": []
+    }
+  ],
+  "education": [
+    { "degree": "M.S., Computer Applications", "school": "National Institute of Technology, Karnataka" },
+    { "degree": "B.S., Mathematics", "school": "Nagarjuna University" }
+  ]
+}

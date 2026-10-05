@@ -1,0 +1,22 @@
+---
+import Base from '../../layouts/Base.astro';
+import ArticleList from '../../components/ArticleList.astro';
+import { getArticles } from '../../lib/articles';
+const articles = await getArticles();
+const tags = [...new Set(articles.flatMap((a) => a.data.tags))].sort();
+---
+<Base title="Articles" description="Writing on data platforms, analytics and AI products.">
+  <div class="page">
+    <h1>Articles</h1>
+    <p class="lede">Notes on data platforms, analytics and building AI products people can trust. <a href="/rss.xml">Subscribe by RSS</a>.</p>
+    {tags.length > 0 && <p class="tags">{tags.map((t) => <a class="tag" href={`/tags/${t}/`}>{t}</a>)}</p>}
+    {articles.length ? <ArticleList articles={articles} /> : <p class="muted">No articles yet.</p>}
+  </div>
+</Base>
+
+<style>
+  .page { max-width: var(--measure); padding: 3rem 0 3rem; }
+  h1 { font-size: var(--step-3); font-weight: 750; font-stretch: 80%; letter-spacing: -0.02em; margin: 0; line-height: 1.1; }
+  .lede { font-family: var(--serif); font-size: 1.1875rem; margin: 0.75rem 0 1.25rem; color: var(--muted); }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 2.5rem; }
+</style>

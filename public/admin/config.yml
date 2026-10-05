@@ -1,0 +1,115 @@
+# Browser editor for kmaddireddy.com (Sveltia CMS).
+# Saving here commits to GitHub; Cloudflare rebuilds the site automatically.
+backend:
+  name: github
+  repo: KrishnaMaddireddy/kmaddireddy
+  branch: main
+  # For a "Sign in with GitHub" button, deploy sveltia-cms-auth and uncomment:
+  # base_url: https://sveltia-cms-auth.<your-subdomain>.workers.dev
+
+site_url: https://kmaddireddy.com
+display_url: https://kmaddireddy.com
+media_folder: public/images/articles
+public_folder: /images/articles
+
+collections:
+  - name: articles
+    label: Articles
+    label_singular: Article
+    folder: src/content/articles
+    extension: md
+    format: frontmatter
+    create: true
+    slug: '{{slug}}'
+    sortable_fields: [date, title]
+    summary: '{{title}} ({{date}})'
+    preview_path: /articles/{{slug}}/
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Summary, name: description, widget: text, hint: 'One or two sentences. Shown in article lists, search results and link previews.' }
+      - { label: Published, name: date, widget: datetime, time_format: false, date_format: 'YYYY-MM-DD', format: 'YYYY-MM-DD' }
+      - { label: Tags, name: tags, widget: list, required: false, hint: 'Lowercase, comma-separated. Example: llm, data-quality' }
+      - { label: Draft, name: draft, widget: boolean, default: false, required: false, hint: 'Drafts are saved but not shown on the site.' }
+      - { label: Originally published at, name: originalUrl, widget: string, required: false, hint: 'Optional link to the LinkedIn or Medium version.' }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: site
+    label: Profile and resume
+    files:
+      - name: profile
+        label: Profile
+        file: src/data/profile.json
+        fields:
+          - { label: Name, name: name, widget: string }
+          - { label: Title, name: title, widget: string }
+          - { label: Headline, name: headline, widget: text }
+          - { label: About, name: intro, widget: text }
+          - { label: Location, name: location, widget: string, required: false }
+          - { label: Email, name: email, widget: string }
+          - { label: GitHub username, name: github, widget: string }
+          - label: Links
+            name: links
+            widget: list
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: URL, name: url, widget: string }
+          - label: Built from zero (timeline at the top of the home page)
+            name: builtFromZero
+            widget: list
+            fields:
+              - { label: Year, name: year, widget: string }
+              - { label: Name, name: name, widget: string }
+              - { label: Note, name: note, widget: string }
+
+      - name: apps
+        label: Apps
+        file: src/data/apps.json
+        fields:
+          - label: Apps
+            name: items
+            widget: list
+            summary: '{{fields.name}}'
+            fields:
+              - { label: Name, name: name, widget: string }
+              - { label: Website, name: url, widget: string, required: false }
+              - { label: GitHub, name: repo, widget: string, required: false }
+              - { label: Year started, name: year, widget: string }
+              - { label: Status, name: status, widget: string, hint: 'For example: Live, Private preview' }
+              - { label: Summary, name: summary, widget: text }
+              - { label: Highlights, name: highlights, widget: list, field: { label: Highlight, name: highlight, widget: string } }
+              - { label: Stack, name: stack, widget: list }
+
+      - name: experience
+        label: Experience
+        file: src/data/experience.json
+        fields:
+          - label: Jobs
+            name: items
+            widget: list
+            summary: '{{fields.role}}, {{fields.company}}'
+            fields:
+              - { label: Role, name: role, widget: string }
+              - { label: Company, name: company, widget: string }
+              - { label: Location, name: location, widget: string, required: false }
+              - { label: Start, name: start, widget: string, hint: 'For example: Jan 2013' }
+              - { label: End, name: end, widget: string, hint: 'For example: Nov 2019, or Present' }
+              - { label: Summary, name: summary, widget: text }
+              - { label: Highlights, name: highlights, widget: list, required: false, field: { label: Highlight, name: highlight, widget: string } }
+          - label: Education
+            name: education
+            widget: list
+            fields:
+              - { label: Degree, name: degree, widget: string }
+              - { label: School, name: school, widget: string }
+
+      - name: github
+        label: GitHub accounts
+        file: src/data/github.json
+        fields:
+          - label: Accounts
+            name: accounts
+            widget: list
+            fields:
+              - { label: Username or organization, name: login, widget: string }
+              - { label: Label, name: label, widget: string }
+              - { label: Note, name: note, widget: string }

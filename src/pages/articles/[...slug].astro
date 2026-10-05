@@ -1,0 +1,54 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import profile from '../../data/profile.json';
+import { getArticles, formatDate, readingTime } from '../../lib/articles';
+
+export async function getStaticPaths() {
+  const articles = await getArticles();
+  return articles.map((article, i) => ({
+    params: { slug: article.id },
+    props: { article, newer: articles[i - 1], older: articles[i + 1] },
+  }));
+}
+
+const { article, newer, older } = Astro.props;
+const { Content } = await render(article);
+const { title, description, date, updated, tags, originalUrl } = article.data;
+---
+<Base title={title} description={description} type="article">
+  <article class="article">
+    <header>
+      <h1>{title}</h1>
+      <p class="desc">{description}</p>
+      <p class="meta">
+        <time datetime={date.toISOString()}>{formatDate(date)}</time>{updated && <>, updated <time datetime={updated.toISOString()}>{formatDate(updated)}</time></>}, {readingTime(article.body)} min read
+      </p>
+      {tags.length > 0 && <p class="tags">{tags.map((t) => <a class="tag" href={`/tags/${t}/`}>{t}</a>)}</p>}
+    </header>
+    <div class="prose"><Content /></div>
+    <footer>
+      {originalUrl && <p class="by">Originally published on <a href={originalUrl}>{new URL(originalUrl).hostname.replace('www.', '')}</a>.</p>}
+      <p class="by">Written by {profile.name}. Questions or corrections: <a href={`mailto:${profile.email}`}>{profile.email}</a>.</p>
+      <nav class="pager" aria-label="More articles">
+        {older ? <a href={`/articles/${older.id}/`}><span class="meta">Older</span>{older.data.title}</a> : <span></span>}
+        {newer && <a class="newer" href={`/articles/${newer.id}/`}><span class="meta">Newer</span>{newer.data.title}</a>}
+      </nav>
+    </footer>
+  </article>
+</Base>
+
+<style>
+  .article { max-width: var(--measure); padding: 3rem 0 2rem; }
+  h1 { font-size: clamp(2rem, 5vw, 2.75rem); font-weight: 750; font-stretch: 82%; letter-spacing: -0.025em; line-height: 1.08; margin: 0; }
+  .desc { font-family: var(--serif); font-size: 1.3rem; line-height: 1.45; color: var(--muted); margin: 1rem 0 0.75rem; }
+  .meta { margin: 0; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.9rem 0 0; }
+  header { margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--rule); }
+  footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
+  .by { color: var(--muted); font-size: 0.9375rem; margin: 0 0 2rem; }
+  .pager { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .pager a { display: flex; flex-direction: column; gap: 0.2rem; text-decoration: none; color: var(--ink); font-weight: 600; }
+  .pager a:hover { color: var(--link); }
+  .pager .newer { text-align: right; grid-column: 2; }
+</style>

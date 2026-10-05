@@ -1,0 +1,46 @@
+{
+  "items": [
+    {
+      "name": "SpendQuery",
+      "url": "https://spendquery.com",
+      "repo": "https://github.com/spendquery",
+      "year": "2026",
+      "status": "Live",
+      "summary": "Plain-English search over 100M+ federal, state and city spending records. Government contractors use it to find open bids, see contracts coming up for re-bid and size up the competition.",
+      "highlights": [
+        "DuckDB and dbt platform loading USAspending.gov, SAM.gov and 16 state checkbooks, each state year reconciled to the cent",
+        "A semantic layer turns questions into a validated query plan, never raw SQL, and serves the web app, API and an MCP server",
+        "Slowest endpoint cut from 43 s to 0.2 s; 257 API tests plus browser tests and live comparisons against USAspending.gov"
+      ],
+      "stack": ["DuckDB", "dbt", "FastAPI", "Next.js", "MCP", "AWS"]
+    },
+    {
+      "name": "PaakData",
+      "url": "https://www.paakdata.com",
+      "repo": "",
+      "year": "2025",
+      "status": "Live",
+      "summary": "AI-first stock analytics for 12,000+ US stocks and ETFs. Ask in plain English and get exact screens back, with the filters shown so every answer can be checked.",
+      "highlights": [
+        "Natural-language screening over hundreds of data fields",
+        "MCP server so assistants like Claude can screen stocks and pull company briefs directly",
+        "LLM and RAG pipelines that write company briefs with data-quality warnings built in, plus catalyst-based “similar to” search"
+      ],
+      "stack": ["PostgreSQL", "pgvector", "Claude", "OpenAI", "Gemini", "MCP"]
+    },
+    {
+      "name": "AskEider",
+      "url": "",
+      "repo": "https://github.com/askeider",
+      "year": "2026",
+      "status": "Private preview",
+      "summary": "Privacy-first natural-language analytics on a governed semantic layer. The model never sees your schema, values or rows; every answer comes from governed metric definitions.",
+      "highlights": [
+        "A local resolver maps schema-free intent to metrics; MetricFlow compiles the SQL and DuckDB runs it read-only in a sandbox",
+        "Profiles any DuckDB, Parquet, CSV, SQLite, Postgres or MySQL source and generates a working dbt + MetricFlow layer",
+        "REST API, Python and TypeScript SDKs, MCP server, Slack and Teams apps; 450+ tests and an OWASP LLM Top 10 threat model"
+      ],
+      "stack": ["dbt", "MetricFlow", "DuckDB", "Python", "TypeScript", "MCP"]
+    }
+  ]
+}

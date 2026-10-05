@@ -1,0 +1,30 @@
+---
+import profile from '../data/profile.json';
+const path = Astro.url.pathname;
+const nav = [
+  { href: '/#apps', label: 'Apps' },
+  { href: '/#experience', label: 'Experience' },
+  { href: '/articles/', label: 'Articles' },
+  { href: '/#github', label: 'GitHub' },
+];
+---
+<header class="wrap site-header">
+  <a href="/" class="home">{profile.name}</a>
+  <nav aria-label="Main">
+    {nav.map((n) => (
+      <a class="mark-link" href={n.href} aria-current={path.startsWith('/articles') && n.href === '/articles/' ? 'page' : undefined}>
+        {n.label}
+      </a>
+    ))}
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+    gap: 0.5rem 1.5rem; padding-top: 1.25rem; padding-bottom: 1.25rem;
+  }
+  .home { font-weight: 700; font-stretch: 85%; color: var(--ink); text-decoration: none; letter-spacing: -0.01em; }
+  nav { display: flex; gap: 1.25rem; font-size: 0.9375rem; }
+  nav a[aria-current='page'] { background-size: 100% 0.42em; }
+</style>

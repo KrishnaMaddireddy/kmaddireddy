@@ -1,0 +1,23 @@
+{
+  "name": "Krishna Maddireddy",
+  "title": "Head of Data Engineering & Analytics",
+  "headline": "I've spent twenty years building data platforms from nothing. Now I build AI analytics products where every answer can be checked.",
+  "intro": "Data and analytics leader for e-commerce and consumer companies, hands-on in SQL, Python, BigQuery, Redshift and AWS. I own the whole stack, from KPIs and executive dashboards down to the pipelines underneath, and lately I've been building natural-language analytics, LLM-written analysis and MCP tools that let AI assistants query data directly.",
+  "location": "Los Angeles, CA",
+  "email": "krishmrm@gmail.com",
+  "github": "KrishnaMaddireddy",
+  "links": [
+    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/krishnamaddireddy" },
+    { "label": "GitHub", "url": "https://github.com/KrishnaMaddireddy" },
+    { "label": "Email", "url": "mailto:krishmrm@gmail.com" }
+  ],
+  "builtFromZero": [
+    { "year": "2007", "name": "LeadPoint", "note": "First data warehouse" },
+    { "year": "2011", "name": "BeachMint", "note": "Warehouse and BI stack" },
+    { "year": "2013", "name": "FreedomPop", "note": "Data team, four countries" },
+    { "year": "2019", "name": "Just Slide Media", "note": "The whole data function" },
+    { "year": "2025", "name": "PaakData", "note": "AI stock analytics" },
+    { "year": "2026", "name": "SpendQuery", "note": "Government spending search" },
+    { "year": "2026", "name": "AskEider", "note": "Semantic-layer analytics" }
+  ]
+}

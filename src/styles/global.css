@@ -1,0 +1,134 @@
+:root {
+  --paper: #edf0f3;
+  --surface: #f6f8fa;
+  --ink: #17202a;
+  --muted: #56616d;
+  --rule: #c9d0d8;
+  --link: #0e6b66;
+  --mark: #f5c542;
+  --mark-soft: #f9dc85;
+
+  --sans: 'Bricolage Grotesque', system-ui, sans-serif;
+  --serif: 'Newsreader', Georgia, serif;
+  --mono: ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --step--1: 0.875rem;
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --step-2: 1.5625rem;
+  --step-3: 1.953rem;
+  --step-5: clamp(2.75rem, 8vw, 5.5rem);
+
+  --measure: 40rem;
+  --gutter: 16px;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #121820;
+    --surface: #18202a;
+    --ink: #e4e9ee;
+    --muted: #94a1ae;
+    --rule: #2b3541;
+    --link: #62c9c0;
+    --mark: #d6a92a;
+    --mark-soft: rgba(214, 169, 42, 0.35);
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: var(--step-0);
+  line-height: 1.55;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; }
+
+a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+
+/* Signature: a highlighter stroke sweeps behind links on hover/focus. */
+.mark-link {
+  color: inherit;
+  text-decoration: none;
+  background-image: linear-gradient(var(--mark-soft), var(--mark-soft));
+  background-repeat: no-repeat;
+  background-position: 0 88%;
+  background-size: 0% 0.42em;
+  transition: background-size 220ms ease-out;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.mark-link:hover, .mark-link:focus-visible { background-size: 100% 0.42em; }
+
+:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; border-radius: 2px; }
+
+.wrap { max-width: 64rem; margin: 0 auto; padding: 0 var(--gutter); }
+@media (min-width: 48rem) { :root { --gutter: 32px; } }
+
+.skip { position: absolute; left: -999px; }
+.skip:focus { left: var(--gutter); top: 8px; background: var(--surface); padding: 6px 10px; z-index: 10; }
+
+/* Two-column section grid: section name on the left, content on the right. */
+.section {
+  display: grid;
+  gap: 1rem;
+  padding: 3.5rem 0;
+  border-top: 1px solid var(--rule);
+}
+.section > h2 {
+  margin: 0;
+  font-size: var(--step-1);
+  font-weight: 600;
+  font-stretch: 85%;
+  letter-spacing: -0.01em;
+}
+.section > h2 a { color: inherit; text-decoration: none; }
+@media (min-width: 48rem) {
+  .section { grid-template-columns: 11rem minmax(0, var(--measure)); gap: 2.5rem; }
+  .section > h2 { position: sticky; top: 1.5rem; align-self: start; }
+}
+
+.muted { color: var(--muted); }
+.meta { color: var(--muted); font-size: var(--step--1); }
+
+.tag {
+  display: inline-block;
+  font-size: 0.8125rem;
+  padding: 0.05rem 0.5rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  color: var(--muted);
+  text-decoration: none;
+}
+a.tag:hover { border-color: var(--ink); color: var(--ink); }
+
+/* Long-form reading */
+.prose { font-family: var(--serif); font-size: 1.1875rem; line-height: 1.7; max-width: var(--measure); }
+.prose h2, .prose h3 { font-family: var(--sans); line-height: 1.25; margin: 2.2em 0 0.6em; letter-spacing: -0.01em; }
+.prose h2 { font-size: var(--step-2); }
+.prose h3 { font-size: var(--step-1); }
+.prose p, .prose ul, .prose ol { margin: 0 0 1.1em; }
+.prose li + li { margin-top: 0.3em; }
+.prose blockquote { margin: 1.5em 0; padding-left: 1.1em; border-left: 3px solid var(--mark); color: var(--muted); font-style: italic; }
+.prose code { font-family: var(--mono); font-size: 0.85em; background: var(--surface); padding: 0.1em 0.3em; border-radius: 4px; }
+.prose pre { font-size: 0.9rem; line-height: 1.55; padding: 1rem 1.15rem; border-radius: 6px; overflow-x: auto; border: 1px solid var(--rule); }
+.prose pre code { background: none; padding: 0; }
+.prose hr { border: 0; border-top: 1px solid var(--rule); margin: 2.5em 0; }
+.prose img { border-radius: 6px; }
+.prose table { border-collapse: collapse; width: 100%; font-family: var(--sans); font-size: 0.95rem; display: block; overflow-x: auto; }
+.prose th, .prose td { border-bottom: 1px solid var(--rule); padding: 0.45rem 0.6rem; text-align: left; }
+
+@media (prefers-color-scheme: dark) {
+  .astro-code, .astro-code span { color: var(--shiki-dark) !important; background-color: var(--shiki-dark-bg) !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}

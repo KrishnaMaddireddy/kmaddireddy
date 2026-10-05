@@ -1,0 +1,58 @@
+---
+import '../styles/global.css';
+import profile from '../data/profile.json';
+import Header from '../components/Header.astro';
+
+interface Props { title?: string; description?: string; type?: 'website' | 'article'; }
+const { title, description = profile.headline, type = 'website' } = Astro.props;
+const fullTitle = title ? `${title} | ${profile.name}` : `${profile.name} | ${profile.title}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" type="application/rss+xml" title={`${profile.name} — Articles`} href="/rss.xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&display=swap"
+    />
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <Header />
+    <main id="main" class="wrap">
+      <slot />
+    </main>
+    <footer class="wrap site-footer">
+      <p>© {new Date().getFullYear()} {profile.name}</p>
+      <p>
+        {profile.links.map((l) => <a class="mark-link" href={l.url}>{l.label}</a>)}
+        <a class="mark-link" href="/rss.xml">RSS</a>
+      </p>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .site-footer {
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.75rem 2rem;
+    border-top: 1px solid var(--rule); margin-top: 2rem; padding-top: 1.5rem; padding-bottom: 2.5rem;
+    color: var(--muted); font-size: var(--step--1);
+  }
+  .site-footer p { margin: 0; display: flex; flex-wrap: wrap; gap: 1.25rem; }
+</style>

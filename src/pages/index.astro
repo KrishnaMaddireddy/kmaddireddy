@@ -1,0 +1,199 @@
+---
+import Base from '../layouts/Base.astro';
+import ArticleList from '../components/ArticleList.astro';
+import profile from '../data/profile.json';
+import apps from '../data/apps.json';
+import experience from '../data/experience.json';
+import github from '../data/github.json';
+import { getArticles } from '../lib/articles';
+import { getRepos } from '../lib/github';
+
+const articles = (await getArticles()).slice(0, 4);
+const repos = await getRepos(github.accounts.map((a) => a.login));
+const founderNames = new Set(apps.items.map((a) => a.name));
+---
+<Base>
+  <section class="hero" aria-labelledby="name">
+    <h1 id="name">{profile.name}</h1>
+    <p class="role">{profile.title}{profile.location && `, ${profile.location}`}</p>
+    <p class="headline">{profile.headline}</p>
+    <p class="hero-links">
+      {profile.links.map((l) => <a class="mark-link" href={l.url}>{l.label}</a>)}
+    </p>
+
+    <figure class="rail">
+      <figcaption>
+        <span>Seven data platforms built from zero</span>
+        <span class="legend"><i class="dot lead"></i>as the data leader <i class="dot found"></i>as founder</span>
+      </figcaption>
+      <ol>
+        {profile.builtFromZero.map((b) => (
+          <li class={founderNames.has(b.name) ? 'found' : 'lead'}>
+            <span class="year">{b.year}</span>
+            <span class="dot" aria-hidden="true"></span>
+            <span class="what"><strong>{b.name}</strong><span>{b.note}</span></span>
+          </li>
+        ))}
+      </ol>
+    </figure>
+  </section>
+
+  <section class="section" id="about">
+    <h2>About</h2>
+    <div class="about prose"><p>{profile.intro}</p></div>
+  </section>
+
+  <section class="section" id="apps">
+    <h2><a href="#apps">Apps I've built</a></h2>
+    <div class="apps">
+      {apps.items.map((app) => (
+        <article class="app">
+          <header>
+            <h3>{app.url ? <a class="mark-link" href={app.url}>{app.name}</a> : app.name}</h3>
+            <p class="meta">{app.status}, since {app.year}</p>
+          </header>
+          <p class="summary">{app.summary}</p>
+          {app.highlights.length > 0 && <ul>{app.highlights.map((h) => <li>{h}</li>)}</ul>}
+          <p class="stack">{app.stack.map((s) => <span class="tag">{s}</span>)}</p>
+          <p class="app-links">
+            {app.url && <a href={app.url}>Visit {app.url.replace(/^https?:\/\/(www\.)?/, '')}</a>}
+            {app.repo && <a href={app.repo}>GitHub</a>}
+          </p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section" id="experience">
+    <h2><a href="#experience">Experience</a></h2>
+    <div>
+      <ol class="jobs">
+        {experience.items.map((job) => (
+          <li>
+            <p class="dates">{job.start} to {job.end}</p>
+            <h3>{job.role}</h3>
+            <p class="company">{job.company}{job.location && <span class="muted">, {job.location}</span>}</p>
+            <p class="job-summary">{job.summary}</p>
+            {job.highlights.length > 0 && <ul>{job.highlights.map((h) => <li>{h}</li>)}</ul>}
+          </li>
+        ))}
+      </ol>
+      <h3 class="edu-h">Education</h3>
+      <ul class="edu">
+        {experience.education.map((e) => <li><strong>{e.degree}</strong><br /><span class="muted">{e.school}</span></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="articles">
+    <h2><a href="/articles/">Articles</a></h2>
+    <div>
+      {articles.length ? <ArticleList articles={articles} /> : <p class="muted">No articles yet.</p>}
+      <p class="more"><a class="mark-link" href="/articles/">All articles</a></p>
+    </div>
+  </section>
+
+  <section class="section" id="github">
+    <h2><a href="#github">GitHub</a></h2>
+    <div>
+      {repos.length > 0 && (
+        <ul class="repos">
+          {repos.map((r) => (
+            <li>
+              <a class="mark-link" href={r.url}><strong>{r.fullName}</strong></a>
+              {r.description && <p>{r.description}</p>}
+              <p class="meta">{[r.language, r.stars ? `${r.stars} stars` : null].filter(Boolean).join(', ')}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+      <ul class="accounts">
+        {github.accounts.map((a) => (
+          <li>
+            <a class="mark-link" href={`https://github.com/${a.login}`}>github.com/{a.login}</a>
+            <span class="muted">{a.note}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <h2>Contact</h2>
+    <div class="prose"><p>The fastest way to reach me is <a href={`mailto:${profile.email}`}>{profile.email}</a>, or on <a href={profile.links[0].url}>LinkedIn</a>.</p></div>
+  </section>
+</Base>
+
+<style>
+  .hero { padding: clamp(2.5rem, 8vw, 6rem) 0 3.5rem; }
+  h1 {
+    margin: 0;
+    font-size: var(--step-5);
+    font-weight: 780;
+    font-stretch: 78%;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    font-variation-settings: 'opsz' 96;
+  }
+  .role { margin: 1rem 0 0; color: var(--muted); font-size: var(--step-1); }
+  .headline {
+    margin: 1.75rem 0 0; max-width: 34ch;
+    font-family: var(--serif); font-size: clamp(1.45rem, 3.2vw, 2rem); line-height: 1.3; font-weight: 400;
+  }
+  .hero-links { display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 1.75rem 0 0; font-weight: 500; }
+
+  /* The rail: seven builds plotted in order. */
+  .rail { margin: 3.5rem 0 0; }
+  .rail figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1.5rem; font-weight: 600; margin-bottom: 1.25rem; }
+  .legend { font-weight: 400; color: var(--muted); font-size: var(--step--1); display: flex; align-items: center; gap: 0.4rem; }
+  .legend .dot { margin-left: 0.6rem; }
+  .rail ol { list-style: none; margin: 0; padding: 0; position: relative; }
+  .dot { display: inline-block; width: 0.8rem; height: 0.8rem; border-radius: 50%; border: 2px solid var(--ink); background: var(--paper); flex: none; }
+  .dot.lead, .lead > .dot { background: var(--ink); }
+  .dot.found, .found > .dot { background: var(--mark); border-color: var(--ink); }
+  .rail li { display: grid; grid-template-columns: 3rem 0.8rem 1fr; gap: 0.9rem; align-items: center; padding: 0.45rem 0; position: relative; }
+  .rail ol::before { content: ''; position: absolute; left: calc(3rem + 0.9rem + 0.4rem - 1px); top: 0.9rem; bottom: 0.9rem; width: 2px; background: var(--rule); }
+  .rail .dot { position: relative; z-index: 1; }
+  .year { font-variant-numeric: tabular-nums; color: var(--muted); font-size: var(--step--1); }
+  .what { display: flex; flex-wrap: wrap; gap: 0 0.6rem; align-items: baseline; }
+  .what span { color: var(--muted); font-size: var(--step--1); }
+
+  @media (min-width: 56rem) {
+    .rail ol { display: grid; grid-template-columns: repeat(7, 1fr); }
+    .rail ol::before { left: 0; right: 0; top: calc(1.4rem + 0.4rem - 1px); bottom: auto; width: auto; height: 2px; }
+    .rail li { grid-template-columns: 1fr; grid-template-rows: 1.4rem 0.8rem auto; gap: 0.6rem; align-items: start; padding: 0 0.75rem 0 0; }
+    .what { flex-direction: column; gap: 0.15rem; line-height: 1.3; }
+  }
+
+  .about.prose { font-size: 1.1875rem; }
+  .about p { margin: 0; }
+
+  h3 { margin: 0; font-size: var(--step-2); font-weight: 650; font-stretch: 88%; letter-spacing: -0.015em; line-height: 1.2; }
+  ul { padding-left: 1.1rem; margin: 0.75rem 0 0; }
+  li::marker { color: var(--muted); }
+  ul li + li { margin-top: 0.35rem; }
+
+  .apps { display: grid; gap: 3rem; }
+  .app header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.25rem 1rem; }
+  .app .meta { margin: 0; }
+  .summary { margin: 0.6rem 0 0; font-family: var(--serif); font-size: 1.1875rem; line-height: 1.55; }
+  .stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1rem 0 0; }
+  .app-links { display: flex; gap: 1.25rem; margin: 0.9rem 0 0; font-weight: 500; }
+
+  .jobs { list-style: none; margin: 0; padding: 0; display: grid; gap: 2.25rem; }
+  .jobs h3 { font-size: var(--step-1); }
+  .dates { margin: 0 0 0.25rem; color: var(--muted); font-size: var(--step--1); font-variant-numeric: tabular-nums; }
+  .company { margin: 0.15rem 0 0; font-weight: 500; }
+  .job-summary { margin: 0.5rem 0 0; }
+  .edu-h { font-size: var(--step-1); margin-top: 2.75rem; }
+  .edu { list-style: none; padding: 0; }
+  .edu li + li { margin-top: 0.75rem; }
+
+  .more { margin: 2rem 0 0; font-weight: 500; }
+
+  .repos { list-style: none; padding: 0; margin: 0 0 2rem; display: grid; gap: 1.25rem; }
+  .repos p { margin: 0.2rem 0 0; }
+  .accounts { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.9rem; }
+  .accounts li { display: flex; flex-direction: column; }
+  .accounts a { font-weight: 500; }
+</style>
