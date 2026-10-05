@@ -10,7 +10,10 @@ import { getRepos } from '../lib/github';
 
 const articles = (await getArticles()).slice(0, 4);
 const repos = await getRepos(github.accounts.map((a) => a.login));
-const founderNames = new Set(apps.items.map((a) => a.name));
+const builds = profile.builtFromZero;
+const roleLabels: Record<string, string> = { engineer: 'as first engineer', leader: 'as the data leader', founder: 'as founder' };
+const rolesPresent = Object.keys(roleLabels).filter((r) => builds.some((b) => b.role === r));
+const countWords = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve'];
 ---
 <Base>
   <section class="hero" aria-labelledby="name">
@@ -21,14 +24,14 @@ const founderNames = new Set(apps.items.map((a) => a.name));
       {profile.links.map((l) => <a class="mark-link" href={l.url}>{l.label}</a>)}
     </p>
 
-    <figure class="rail">
+    <figure class="rail" style={`--count: ${builds.length}`}>
       <figcaption>
-        <span>Seven data platforms built from zero</span>
-        <span class="legend"><i class="dot lead"></i>as the data leader <i class="dot found"></i>as founder</span>
+        <span>{countWords[builds.length] ?? builds.length} platforms built from zero</span>
+        <span class="legend">{rolesPresent.map((r) => <span><i class={`dot ${r}`}></i>{roleLabels[r]}</span>)}</span>
       </figcaption>
       <ol>
-        {profile.builtFromZero.map((b) => (
-          <li class={founderNames.has(b.name) ? 'found' : 'lead'}>
+        {builds.map((b) => (
+          <li class={b.role}>
             <span class="year">{b.year}</span>
             <span class="dot" aria-hidden="true"></span>
             <span class="what"><strong>{b.name}</strong><span>{b.note}</span></span>
@@ -145,12 +148,13 @@ const founderNames = new Set(apps.items.map((a) => a.name));
   /* The rail: seven builds plotted in order. */
   .rail { margin: 3.5rem 0 0; }
   .rail figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1.5rem; font-weight: 600; margin-bottom: 1.25rem; }
-  .legend { font-weight: 400; color: var(--muted); font-size: var(--step--1); display: flex; align-items: center; gap: 0.4rem; }
-  .legend .dot { margin-left: 0.6rem; }
+  .legend { font-weight: 400; color: var(--muted); font-size: var(--step--1); display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 1rem; }
+  .legend > span { display: inline-flex; align-items: center; gap: 0.4rem; }
   .rail ol { list-style: none; margin: 0; padding: 0; position: relative; }
   .dot { display: inline-block; width: 0.8rem; height: 0.8rem; border-radius: 50%; border: 2px solid var(--ink); background: var(--paper); flex: none; }
-  .dot.lead, .lead > .dot { background: var(--ink); }
-  .dot.found, .found > .dot { background: var(--mark); border-color: var(--ink); }
+  .dot.leader, .leader > .dot { background: var(--ink); }
+  .dot.founder, .founder > .dot { background: var(--mark); border-color: var(--ink); }
+  .dot.engineer, .engineer > .dot { background: var(--paper); }
   .rail li { display: grid; grid-template-columns: 3rem 0.8rem 1fr; gap: 0.9rem; align-items: center; padding: 0.45rem 0; position: relative; }
   .rail ol::before { content: ''; position: absolute; left: calc(3rem + 0.9rem + 0.4rem - 1px); top: 0.9rem; bottom: 0.9rem; width: 2px; background: var(--rule); }
   .rail .dot { position: relative; z-index: 1; }
@@ -159,7 +163,7 @@ const founderNames = new Set(apps.items.map((a) => a.name));
   .what span { color: var(--muted); font-size: var(--step--1); }
 
   @media (min-width: 56rem) {
-    .rail ol { display: grid; grid-template-columns: repeat(7, 1fr); }
+    .rail ol { display: grid; grid-template-columns: repeat(var(--count, 7), 1fr); }
     .rail ol::before { left: 0; right: 0; top: calc(1.4rem + 0.4rem - 1px); bottom: auto; width: auto; height: 2px; }
     .rail li { grid-template-columns: 1fr; grid-template-rows: 1.4rem 0.8rem auto; gap: 0.6rem; align-items: start; padding: 0 0.75rem 0 0; }
     .what { flex-direction: column; gap: 0.15rem; line-height: 1.3; }

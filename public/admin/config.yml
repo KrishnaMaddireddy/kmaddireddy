@@ -60,6 +60,7 @@ collections:
               - { label: Year, name: year, widget: string }
               - { label: Name, name: name, widget: string }
               - { label: Note, name: note, widget: string }
+              - { label: Role, name: role, widget: select, options: [engineer, leader, founder], hint: 'Sets the dot style: first engineer, data leader or founder' }
 
       - name: apps
         label: Apps

@@ -7,17 +7,67 @@
   "email": "krishmrm@gmail.com",
   "github": "KrishnaMaddireddy",
   "links": [
-    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/krishnamaddireddy" },
-    { "label": "GitHub", "url": "https://github.com/KrishnaMaddireddy" },
-    { "label": "Email", "url": "mailto:krishmrm@gmail.com" }
+    {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/krishnamaddireddy"
+    },
+    {
+      "label": "GitHub",
+      "url": "https://github.com/KrishnaMaddireddy"
+    },
+    {
+      "label": "Email",
+      "url": "mailto:krishmrm@gmail.com"
+    }
   ],
   "builtFromZero": [
-    { "year": "2007", "name": "LeadPoint", "note": "First data warehouse" },
-    { "year": "2011", "name": "BeachMint", "note": "Warehouse and BI stack" },
-    { "year": "2013", "name": "FreedomPop", "note": "Data team, four countries" },
-    { "year": "2019", "name": "Just Slide Media", "note": "The whole data function" },
-    { "year": "2025", "name": "PaakData", "note": "AI stock analytics" },
-    { "year": "2026", "name": "SpendQuery", "note": "Government spending search" },
-    { "year": "2026", "name": "AskEider", "note": "Semantic-layer analytics" }
+    {
+      "year": "2005",
+      "name": "Savings.com",
+      "note": "First engineer, original platform",
+      "role": "engineer"
+    },
+    {
+      "year": "2007",
+      "name": "LeadPoint",
+      "note": "First data warehouse",
+      "role": "leader"
+    },
+    {
+      "year": "2011",
+      "name": "BeachMint",
+      "note": "Warehouse and BI stack",
+      "role": "leader"
+    },
+    {
+      "year": "2013",
+      "name": "FreedomPop",
+      "note": "Data team, four countries",
+      "role": "leader"
+    },
+    {
+      "year": "2019",
+      "name": "Just Slide Media",
+      "note": "The whole data function",
+      "role": "leader"
+    },
+    {
+      "year": "2025",
+      "name": "PaakData",
+      "note": "AI stock analytics",
+      "role": "founder"
+    },
+    {
+      "year": "2026",
+      "name": "SpendQuery",
+      "note": "Government spending search",
+      "role": "founder"
+    },
+    {
+      "year": "2026",
+      "name": "AskEider",
+      "note": "Semantic-layer analytics",
+      "role": "founder"
+    }
   ]
 }
