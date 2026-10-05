@@ -12,7 +12,9 @@ SpendQuery lets anyone ask plain-English questions about US federal spending. To
 
 Our "broadband" topic included highway grants to "reconnect communities", an interstate widening project, and rental-aid grants that list internet as just one allowed use.
 
-So we added Jev from TypeSafe. It doesn't write text. It answers narrow questions with a probability: Is this award mainly about broadband, or does it only mention it? What does it pay for?
+So we added Jev from TypeSafe. It doesn't write text. It answers narrow questions with a probability: Is this award mainly about broadband, or does it only mention it? What does it pay for? The picture shows the whole pipeline and one real example.
+
+![SpendQuery × Jev: how topic pages are cleaned up. Six steps from loading USAspending.gov nightly to topic pages showing what's kept, with a real example of a broadband-tagged highway grant scored 0.01 and set aside.](/images/articles/spendquery-topic-pipeline.jpg)
 
 ## Three rules we kept
 

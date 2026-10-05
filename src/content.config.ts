@@ -13,6 +13,9 @@ const articles = defineCollection({
     draft: z.boolean().default(false),
     // Where the piece first appeared (LinkedIn, Medium...). Shown as a link under the article.
     originalUrl: z.string().url().optional(),
+    // Optional cover image shown at the top of the article and in link previews.
+    cover: z.string().optional(),
+    coverAlt: z.string().optional(),
   }),
 });
 

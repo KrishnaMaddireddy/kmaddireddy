@@ -3,6 +3,8 @@ title: Let AI Answer Data Questions — Without Ever Showing It Your Database
 description: A two-path architecture for natural-language analytics, in a world where the schema is the secret and wrong numbers don't crash, they get put in slides.
 date: 2026-08-25
 tags: [semantic-layer, llm, data-platforms, askeider]
+cover: /images/articles/ai-data-questions-cover.png
+coverAlt: "Compile what must be right, verify what must be safe. The governed path: question, external AI, trusted code, database. The exploratory path: question, local AI, safety checker, read-only database."
 originalUrl: https://www.linkedin.com/pulse/let-ai-answer-data-questions-without-ever-showing-your-maddireddy-tij2c/
 ---
 

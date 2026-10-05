@@ -121,7 +121,7 @@ a.tag:hover { border-color: var(--ink); color: var(--ink); }
 .prose pre { font-size: 0.9rem; line-height: 1.55; padding: 1rem 1.15rem; border-radius: 6px; overflow-x: auto; border: 1px solid var(--rule); }
 .prose pre code { background: none; padding: 0; }
 .prose hr { border: 0; border-top: 1px solid var(--rule); margin: 2.5em 0; }
-.prose img { border-radius: 6px; }
+.prose img { display: block; margin: 1.75em auto; border-radius: 6px; border: 1px solid var(--rule); background: #fff; }
 .prose table { border-collapse: collapse; width: 100%; font-family: var(--sans); font-size: 0.95rem; display: block; overflow-x: auto; }
 .prose th, .prose td { border-bottom: 1px solid var(--rule); padding: 0.45rem 0.6rem; text-align: left; }
 

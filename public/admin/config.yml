@@ -31,6 +31,8 @@ collections:
       - { label: Tags, name: tags, widget: list, required: false, hint: 'Lowercase, comma-separated. Example: llm, data-quality' }
       - { label: Draft, name: draft, widget: boolean, default: false, required: false, hint: 'Drafts are saved but not shown on the site.' }
       - { label: Originally published at, name: originalUrl, widget: string, required: false, hint: 'Optional link to the LinkedIn or Medium version.' }
+      - { label: Cover image, name: cover, widget: image, required: false, hint: 'Shown at the top of the article and in link previews. 1280×720 works well.' }
+      - { label: Cover image description, name: coverAlt, widget: string, required: false, hint: 'Describe the image for screen readers.' }
       - { label: Body, name: body, widget: markdown }
 
   - name: site

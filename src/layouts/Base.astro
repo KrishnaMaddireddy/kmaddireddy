@@ -3,8 +3,8 @@ import '../styles/global.css';
 import profile from '../data/profile.json';
 import Header from '../components/Header.astro';
 
-interface Props { title?: string; description?: string; type?: 'website' | 'article'; }
-const { title, description = profile.headline, type = 'website' } = Astro.props;
+interface Props { title?: string; description?: string; type?: 'website' | 'article'; image?: string; }
+const { title, description = profile.headline, type = 'website', image } = Astro.props;
 const fullTitle = title ? `${title} | ${profile.name}` : `${profile.name} | ${profile.title}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -23,7 +23,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary" />
+    {image && <meta property="og:image" content={new URL(image, Astro.site)} />}
+    <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

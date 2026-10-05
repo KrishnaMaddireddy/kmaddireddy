@@ -14,9 +14,9 @@ export async function getStaticPaths() {
 
 const { article, newer, older } = Astro.props;
 const { Content } = await render(article);
-const { title, description, date, updated, tags, originalUrl } = article.data;
+const { title, description, date, updated, tags, originalUrl, cover, coverAlt } = article.data;
 ---
-<Base title={title} description={description} type="article">
+<Base title={title} description={description} type="article" image={cover}>
   <article class="article">
     <header>
       <h1>{title}</h1>
@@ -26,6 +26,11 @@ const { title, description, date, updated, tags, originalUrl } = article.data;
       </p>
       {tags.length > 0 && <p class="tags">{tags.map((t) => <a class="tag" href={`/tags/${t}/`}>{t}</a>)}</p>}
     </header>
+    {cover && (
+      <figure class="cover">
+        <a href={cover}><img src={cover} alt={coverAlt ?? ''} loading="eager" decoding="async" /></a>
+      </figure>
+    )}
     <div class="prose"><Content /></div>
     <footer>
       {originalUrl && <p class="by">Originally published on <a href={originalUrl}>{new URL(originalUrl).hostname.replace('www.', '')}</a>.</p>}
@@ -44,6 +49,8 @@ const { title, description, date, updated, tags, originalUrl } = article.data;
   .desc { font-family: var(--serif); font-size: 1.3rem; line-height: 1.45; color: var(--muted); margin: 1rem 0 0.75rem; }
   .meta { margin: 0; }
   .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.9rem 0 0; }
+  .cover { margin: 0 0 2.5rem; }
+  .cover img { display: block; width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--rule); background: #fff; }
   header { margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--rule); }
   footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
   .by { color: var(--muted); font-size: 0.9375rem; margin: 0 0 2rem; }

@@ -3,6 +3,8 @@ title: Building Natural Language Stock Search Without Model-Generated SQL
 description: How PaakData turns plain-English stock questions into checked database queries, with a model that never writes SQL.
 date: 2026-09-15
 tags: [paakdata, llm, search, postgres]
+cover: /images/articles/stock-search-cover.png
+coverAlt: "Diagram: how a sentence becomes a database query. Router, parser (the one model call), JSON spec, repair and validate, SQL builder, Postgres, explain line."
 originalUrl: https://www.linkedin.com/pulse/building-natural-language-stock-search-without-sql-krishna-maddireddy-qalbc/
 ---
 
