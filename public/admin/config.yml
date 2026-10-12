@@ -28,7 +28,7 @@ collections:
       - { label: Title, name: title, widget: string }
       - { label: Summary, name: description, widget: text, hint: 'One or two sentences. Shown in article lists, search results and link previews.' }
       - { label: Published, name: date, widget: datetime, time_format: false, date_format: 'YYYY-MM-DD', format: 'YYYY-MM-DD' }
-      - { label: Tags, name: tags, widget: list, required: false, hint: 'Lowercase, comma-separated. Example: llm, data-quality' }
+      - { label: Tags, name: tags, widget: list, required: false, hint: 'One tag per item, or several in one line. Hashtags like #GovCon work too.' }
       - { label: Draft, name: draft, widget: boolean, default: false, required: false, hint: 'Drafts are saved but not shown on the site.' }
       - { label: Originally published at, name: originalUrl, widget: string, required: false, hint: 'Optional link to the LinkedIn or Medium version.' }
       - { label: Cover image, name: cover, widget: image, required: false, hint: 'Shown at the top of the article and in link previews. 1280×720 works well.' }
