@@ -4,7 +4,7 @@ description: How we rebuilt SpendQuery's topic search with AI at night and a sin
 date: 2026-10-12
 tags:
   - '#GovCon #FederalContracting #AI #LLM #SearchEngineering #GovTech'
-draft: false
+draft: true
 originalUrl: ''
 cover: /images/articles/spendquery-ai-search-architecture.png
 coverAlt: ''
