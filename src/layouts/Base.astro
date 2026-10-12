@@ -49,22 +49,39 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <p class="toast" role="status" aria-live="polite"></p>
     <script>
       // Email links: many computers have no mail app set up, so a mailto: click can do nothing.
-      // Copy the address and confirm it, then still let a configured mail app open.
+      // Copy the address and confirm it right away, then still let a configured mail app open.
       const toast = document.querySelector<HTMLElement>('.toast');
       let timer: ReturnType<typeof setTimeout> | undefined;
+
+      function copyText(text: string): boolean {
+        // Synchronous copy inside the click, so it can't hang the way the async clipboard API can.
+        const field = document.createElement('textarea');
+        field.value = text;
+        field.setAttribute('readonly', '');
+        field.style.position = 'fixed';
+        field.style.opacity = '0';
+        document.body.appendChild(field);
+        field.select();
+        let ok = false;
+        try {
+          ok = document.execCommand('copy');
+        } catch {
+          ok = false;
+        }
+        field.remove();
+        if (!ok) navigator.clipboard?.writeText(text).catch(() => {});
+        return ok;
+      }
+
       document.querySelectorAll<HTMLAnchorElement>('a[href^="mailto:"]').forEach((link) => {
-        link.addEventListener('click', async () => {
+        link.addEventListener('click', () => {
           const address = link.href.replace(/^mailto:/, '').split('?')[0];
-          let copied = false;
-          try {
-            await navigator.clipboard.writeText(address);
-            copied = true;
-          } catch {}
+          const copied = copyText(address);
           if (!toast) return;
-          toast.textContent = copied ? `Email address copied: ${address}` : `Email: ${address}`;
+          toast.textContent = copied ? `Email address copied: ${address}` : `Email me at ${address}`;
           toast.classList.add('show');
           clearTimeout(timer);
-          timer = setTimeout(() => toast.classList.remove('show'), 3500);
+          timer = setTimeout(() => toast.classList.remove('show'), 4000);
         });
       });
     </script>
