@@ -53,7 +53,7 @@ const countWords = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', '
         <article class="app">
           <header>
             <h3>{app.url ? <a class="mark-link" href={app.url}>{app.name}</a> : app.name}</h3>
-            <p class="meta">{app.status}, since {app.year}</p>
+            <p class="meta">{app.status ? `${app.status}, since ${app.year}` : `Since ${app.year}`}</p>
           </header>
           <p class="summary">{app.summary}</p>
           {app.highlights.length > 0 && <ul>{app.highlights.map((h) => <li>{h}</li>)}</ul>}

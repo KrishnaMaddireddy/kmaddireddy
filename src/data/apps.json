@@ -12,7 +12,14 @@
         "A semantic layer turns questions into a validated query plan, never raw SQL, and serves the web app, API and an MCP server",
         "Slowest endpoint cut from 43 s to 0.2 s; 257 API tests plus browser tests and live comparisons against USAspending.gov"
       ],
-      "stack": ["DuckDB", "dbt", "FastAPI", "Next.js", "MCP", "AWS"]
+      "stack": [
+        "DuckDB",
+        "dbt",
+        "FastAPI",
+        "Next.js",
+        "MCP",
+        "AWS"
+      ]
     },
     {
       "name": "PaakData",
@@ -26,7 +33,14 @@
         "MCP server so assistants like Claude can screen stocks and pull company briefs directly",
         "LLM and RAG pipelines that write company briefs with data-quality warnings built in, plus catalyst-based “similar to” search"
       ],
-      "stack": ["PostgreSQL", "pgvector", "Claude", "OpenAI", "Gemini", "MCP"]
+      "stack": [
+        "PostgreSQL",
+        "pgvector",
+        "Claude",
+        "OpenAI",
+        "Gemini",
+        "MCP"
+      ]
     },
     {
       "name": "AskEider",
@@ -40,7 +54,35 @@
         "Profiles any DuckDB, Parquet, CSV, SQLite, Postgres or MySQL source and generates a working dbt + MetricFlow layer",
         "REST API, Python and TypeScript SDKs, MCP server, Slack and Teams apps; 450+ tests and an OWASP LLM Top 10 threat model"
       ],
-      "stack": ["dbt", "MetricFlow", "DuckDB", "Python", "TypeScript", "MCP"]
+      "stack": [
+        "dbt",
+        "MetricFlow",
+        "DuckDB",
+        "Python",
+        "TypeScript",
+        "MCP"
+      ]
+    },
+    {
+      "name": "MLCompass",
+      "url": "",
+      "repo": "",
+      "year": "2026",
+      "status": "",
+      "summary": "Bring a dataset; MLCompass recommends which kind of machine learning fits it, then trains, checks and explains the model end to end. Built for people who know their data but not ML, every result comes with a plain-language answer and a trust verdict.",
+      "highlights": [
+        "Guide me turns four plain questions into a validated model. It ranks 10 ML approaches, applies leakage and baseline checks, explains predictions with SHAP and “what would change the outcome?”, and runs an Autopilot that keeps only gains that hold up under cross-validation.",
+        "Marketing measurement: a marketing mix model that captures paid media’s halo on direct and organic traffic (within 9.7% of known effects, against 12.3% for last-click), synthetic-control geo experiments, and Shapley + ML attribution that scales to 500K journeys.",
+        "Works with any AI model, or none: an agent that runs only tested tools and never generated code, and summaries written for executives, marketing, finance and sales. Exports a prediction API, a training script, and Snowflake and Databricks deployment kits, with 343 tests."
+      ],
+      "stack": [
+        "Python",
+        "scikit-learn",
+        "Streamlit",
+        "FastAPI",
+        "Docker",
+        "LLMs"
+      ]
     }
   ]
 }
