@@ -9,7 +9,10 @@ import { getArticles } from '../lib/articles';
 import { getRepos } from '../lib/github';
 
 const articles = (await getArticles()).slice(0, 4);
-const repos = await getRepos(github.accounts.map((a) => a.login));
+const repos = await getRepos(github.accounts.map((a) => a.login), github.hideRepos);
+// The first account (your personal one) leads the section, followed by its public repos,
+// then the remaining accounts.
+const [leadAccount, ...otherAccounts] = github.accounts;
 const builds = profile.builtFromZero;
 const roleLabels: Record<string, string> = { engineer: 'as first engineer', leader: 'as the data leader', founder: 'as founder' };
 const rolesPresent = Object.keys(roleLabels).filter((r) => builds.some((b) => b.role === r));
@@ -99,6 +102,14 @@ const countWords = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', '
   <section class="section" id="github">
     <h2><a href="#github">GitHub</a></h2>
     <div>
+      {leadAccount && (
+        <ul class="accounts lead">
+          <li>
+            <a class="mark-link" href={`https://github.com/${leadAccount.login}`}>github.com/{leadAccount.login}</a>
+            <span class="muted">{leadAccount.note}</span>
+          </li>
+        </ul>
+      )}
       {repos.length > 0 && (
         <ul class="repos">
           {repos.map((r) => (
@@ -111,7 +122,7 @@ const countWords = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', '
         </ul>
       )}
       <ul class="accounts">
-        {github.accounts.map((a) => (
+        {otherAccounts.map((a) => (
           <li>
             <a class="mark-link" href={`https://github.com/${a.login}`}>github.com/{a.login}</a>
             <span class="muted">{a.note}</span>
@@ -200,4 +211,5 @@ const countWords = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', '
   .accounts { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.9rem; }
   .accounts li { display: flex; flex-direction: column; }
   .accounts a { font-weight: 500; }
+  .accounts.lead { margin-bottom: 1.5rem; }
 </style>

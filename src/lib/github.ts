@@ -39,8 +39,11 @@ async function list(path: string): Promise<Repo[]> {
   }
 }
 
-export async function getRepos(logins: string[], limit = 6): Promise<Repo[]> {
+export async function getRepos(logins: string[], hide: string[] = [], limit = 6): Promise<Repo[]> {
   // users/{login}/repos works for both people and organizations.
-  const all = (await Promise.all(logins.map((l) => list(`users/${l}/repos`)))).flat();
+  const hidden = new Set(hide.map((h) => h.toLowerCase()));
+  const all = (await Promise.all(logins.map((l) => list(`users/${l}/repos`))))
+    .flat()
+    .filter((r) => !hidden.has(r.fullName.toLowerCase()));
   return all.sort((a, b) => b.stars - a.stars || b.pushedAt.localeCompare(a.pushedAt)).slice(0, limit);
 }

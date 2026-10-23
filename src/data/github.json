@@ -1,7 +1,22 @@
 {
   "accounts": [
-    { "login": "spendquery", "label": "SpendQuery", "note": "Government spending search and contractor tools" },
-    { "login": "askeider", "label": "AskEider", "note": "Semantic-layer analytics engine (private preview)" },
-    { "login": "KrishnaMaddireddy", "label": "Personal", "note": "Experiments and smaller projects" }
+    {
+      "login": "KrishnaMaddireddy",
+      "label": "Personal",
+      "note": "Experiments and smaller projects"
+    },
+    {
+      "login": "spendquery",
+      "label": "SpendQuery",
+      "note": "Government spending search and contractor tools"
+    },
+    {
+      "login": "askeider",
+      "label": "AskEider",
+      "note": "Semantic-layer analytics engine (private preview)"
+    }
+  ],
+  "hideRepos": [
+    "KrishnaMaddireddy/kmaddireddy"
   ]
 }
