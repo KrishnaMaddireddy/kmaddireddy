@@ -88,7 +88,7 @@
       "name": "MCP Browser",
       "url": "",
       "repo": "https://github.com/KrishnaMaddireddy/mcp-browser",
-      "year": "",
+      "year": "2026",
       "status": "Open source, MIT licensed",
       "summary": "The search engine that shows its work. An open-source AI search browser that sends each question to the few MCP servers that know the answer, chosen from the 48,000+ in the official MCP Registry, and shows several independent sources side by side instead of one generated answer. Runs locally with no account, and works without an AI key, with Ollama, or inside Claude.",
       "highlights": [
