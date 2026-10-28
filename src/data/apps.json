@@ -6,7 +6,7 @@
       "repo": "https://github.com/spendquery",
       "year": "2026",
       "status": "Live",
-      "summary": "Plain-English search over 100M+ federal, state and city spending records. Government contractors use it to find open bids, see contracts coming up for re-bid and size up the competition.",
+      "summary": "Plain-English search over 200M+ federal, state and city spending records. Government contractors use it to find open bids, see contracts coming up for re-bid and size up the competition.",
       "highlights": [
         "DuckDB and dbt platform loading USAspending.gov, SAM.gov and 16 state checkbooks, each state year reconciled to the cent",
         "A semantic layer turns questions into a validated query plan, never raw SQL, and serves the web app, API and an MCP server",
@@ -68,7 +68,7 @@
       "url": "",
       "repo": "",
       "year": "2026",
-      "status": "",
+      "status": "Building",
       "summary": "Bring a dataset; MLCompass recommends which kind of machine learning fits it, then trains, checks and explains the model end to end. Built for people who know their data but not ML, every result comes with a plain-language answer and a trust verdict.",
       "highlights": [
         "Guide me turns four plain questions into a validated model. It ranks 10 ML approaches, applies leakage and baseline checks, explains predictions with SHAP and “what would change the outcome?”, and runs an Autopilot that keeps only gains that hold up under cross-validation.",
