@@ -35,6 +35,23 @@ collections:
       - { label: Cover image description, name: coverAlt, widget: string, required: false, hint: 'Describe the image for screen readers.' }
       - { label: Body, name: body, widget: markdown }
 
+  - name: appPages
+    label: App write-ups
+    label_singular: App write-up
+    folder: src/content/apps
+    extension: md
+    format: frontmatter
+    create: true
+    slug: '{{slug}}'
+    summary: '{{app}}: {{title}}'
+    preview_path: /apps/{{slug}}/
+    fields:
+      - { label: App, name: app, widget: string, hint: 'Must match the app name under Profile and resume → Apps, for example SpendQuery. Its card then links here.' }
+      - { label: Title, name: title, widget: string }
+      - { label: Summary, name: description, widget: text, hint: 'One or two sentences for search results and link previews.' }
+      - { label: Your role, name: role, widget: string, required: false, hint: 'For example: Founder and builder' }
+      - { label: Body, name: body, widget: markdown, hint: 'Use the toolbar for headings, bold text and bullet lists.' }
+
   - name: site
     label: Profile and resume
     files:
@@ -78,7 +95,7 @@ collections:
               - { label: GitHub, name: repo, widget: string, required: false }
               - { label: Year started, name: year, widget: string }
               - { label: Status, name: status, widget: string, hint: 'For example: Live, Private preview' }
-              - { label: Summary, name: summary, widget: text }
+              - { label: Summary, name: summary, widget: text, hint: 'Two or three sentences for the card. Put a longer write-up under App write-ups.' }
               - { label: Highlights, name: highlights, widget: list, field: { label: Highlight, name: highlight, widget: string } }
               - { label: Stack, name: stack, widget: list }
 

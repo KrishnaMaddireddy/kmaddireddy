@@ -41,4 +41,16 @@ const articles = defineCollection({
   }),
 });
 
-export const collections = { articles };
+// Long-form write-ups for apps, shown at /apps/<file name>/ and linked from the app's card.
+// `app` must match the app's name in src/data/apps.json.
+const appPages = defineCollection({
+  loader: glob({ base: './src/content/apps', pattern: '**/*.{md,mdx}' }),
+  schema: z.object({
+    app: z.string(),
+    title: z.string(),
+    description: z.string(),
+    role: optional(z.string()),
+  }),
+});
+
+export const collections = { articles, appPages };

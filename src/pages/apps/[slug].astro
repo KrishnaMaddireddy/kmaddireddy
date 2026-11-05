@@ -1,0 +1,45 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import apps from '../../data/apps.json';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('appPages');
+  return pages.map((page) => ({ params: { slug: page.id }, props: { page } }));
+}
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+const { title, description, role } = page.data;
+const app = apps.items.find((a) => a.name.trim().toLowerCase() === page.data.app.trim().toLowerCase());
+const site = app?.url ? app.url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '') : '';
+---
+<Base title={title} description={description} type="article">
+  <article class="writeup">
+    <p class="back"><a class="mark-link" href="/#apps">Apps</a></p>
+    <header>
+      <h1>{title}</h1>
+      <p class="meta">
+        {[role, app && [app.status, app.year && `since ${app.year}`].filter(Boolean).join(', ')].filter(Boolean).join('. ')}
+      </p>
+      <p class="links">
+        {app?.url && <a href={app.url}>Visit {site}</a>}
+        {app?.repo && <a href={app.repo}>GitHub</a>}
+      </p>
+    </header>
+    <div class="prose"><Content /></div>
+    <footer>
+      <p><a class="mark-link" href="/#apps">See all apps</a></p>
+    </footer>
+  </article>
+</Base>
+
+<style>
+  .writeup { max-width: var(--measure); padding: 2rem 0 2rem; }
+  .back { margin: 0 0 1.5rem; font-size: var(--step--1); }
+  h1 { font-size: clamp(2rem, 5vw, 2.75rem); font-weight: 750; font-stretch: 82%; letter-spacing: -0.025em; line-height: 1.08; margin: 0; }
+  .meta { margin: 1rem 0 0; }
+  .links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin: 0.75rem 0 0; font-weight: 500; }
+  header { margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--rule); }
+  footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); font-weight: 500; }
+</style>

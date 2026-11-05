@@ -6,19 +6,23 @@
       "repo": "https://github.com/spendquery",
       "year": "2026",
       "status": "Live",
-      "summary": "The U.S. government publishes every federal contract, grant and loan on USAspending.gov: tens of millions of records a year. The data is public, but it’s hard to use. You need to know agency codes, NAICS and PSC codes, fiscal-year rules, and how subsidiaries roll up to parent companies.\n\nSpendQuery turns that data into answers. Ask “Who are the top IT contractors at the VA?”, “What’s coming up for re-bid in Virginia?” or “Where do I bid in Simi Valley?” You get a sourced answer, a chart, and the SQL behind every number.\n\nHow AI is used: carefully, where it helps\nNatural language to a query plan, not to raw SQL. An LLM turns the question into a structured QueryPlan in business terms: metrics, filters, years. Deterministic code (a resolver, a dbt semantic layer, a SQL guard, a read-only runner with time limits) turns the plan into SQL. The model never touches the database. Every answer shows its SQL and caveats, such as “amounts are obligations, not outlays.”\nSpendQuery Chat. An agent loop with typed tools: spending, open notices, companies, size standards, contract vehicles, grants, subcontractors, SBIR and the FAR. A figure check strips any number the tools didn’t return, so the chat can’t invent statistics.\nAI agents for contractors. The pursuit desk has agents for the work of winning a contract:\none finds opportunities;\none weighs bid / no-bid;\none suggests teaming partners;\none watches amendments;\none drafts responses.\nEach runs as a multi-step workflow with saved steps. Each workflow has an evaluation gate built from labelled cases, so a prompt or model change can’t quietly make it worse.\nEvals as a habit.\nA golden set of 500+ questions runs against the planner and reached 99.4% correct.\nThe chat has its own rule-based eval: which lookups it used, which words a good answer must and must not contain, and time.\nBoth run on a schedule and catch regressions before users do.\nBuilt for AI assistants, not just people\nMCP server. SpendQuery is a remote Model Context Protocol connector: 20 read-only tools and 4 prompts (bid/no-bid memo, market research, sources-sought reply). It works in Claude, ChatGPT and any MCP client.\nMCP Apps widgets. In Claude and ChatGPT, results show as interactive tables and charts, not raw JSON: open notices, company profiles, re-bids, spending charts. Ask for FY2026 spending across California’s 52 congressional districts and Claude draws the map.\nAI-friendly web. The site publishes:\nllms.txt and llms-full.txt;\nJSON-LD (Dataset, FAQPage, BreadcrumbList) on data pages;\nCSV alternates;\nserver-rendered summaries, so AI crawlers and answer engines get facts, not a JavaScript shell.\nSEO as engineering\nThousands of server-rendered pages for states, counties, districts, agencies, industries, contract vehicles, FAR sections and top-contractor rankings, each built from live data.\nSitemaps whose lastmod is the day a page’s content actually changed, plus IndexNow pings for new pages and a rule against thin pages: a page joins the sitemap only once it has real content.\nPerformance work driven by crawl data: kept pages, warm-ups after deploys, and fast 404s, so Googlebot sees pages in under 2 seconds.\nData platform\nPipeline: DuckDB plus dbt in a medallion architecture (bronze, silver, gold). It holds 40M+ federal transactions (FY2023–2026), refreshed daily, with reconciliation tests against USAspending.\nBeyond federal awards:\nstate, county and city checkbooks;\nSAM.gov notices;\nGrants.gov, SBIR, FEMA, earmarks and the FAR;\na directory of 600+ state, county and city bid portals.\nOperations: a job runner swaps a fresh warehouse copy in only when every check passes, deploys are automated, and a Playwright live check runs after every release.\nWhat I learned\nLet AI plan and let code execute.\nMake every number traceable.\nTreat evals like tests.\nDesign for the AI assistants your users already work in, not just your own UI.\n\nStack: Python/FastAPI, DuckDB, dbt, Next.js, MCP (Python SDK + ext-apps), Claude, AWS, Cloudflare.",
+      "summary": "Ask U.S. government spending anything, in plain English. SpendQuery turns the tens of millions of public records on USAspending.gov into answers: a sourced answer, a chart, and the SQL behind every number.",
       "highlights": [
-        "DuckDB and dbt platform loading USAspending.gov, SAM.gov and 16 state checkbooks, each state year reconciled to the cent",
-        "A semantic layer turns questions into a validated query plan, never raw SQL, and serves the web app, API and an MCP server",
-        "Slowest endpoint cut from 43 s to 0.2 s; 257 API tests plus browser tests and live comparisons against USAspending.gov"
+        "Natural language to a query plan, not to raw SQL: an LLM writes a structured QueryPlan and deterministic code turns it into SQL. The model never touches the database.",
+        "SpendQuery Chat and AI agents for contractors, each behind an evaluation gate; a golden set of 500+ questions reached 99.4% correct",
+        "Remote MCP server with 20 read-only tools and 4 prompts, with interactive tables and charts in Claude and ChatGPT",
+        "DuckDB plus dbt medallion pipeline holding 40M+ federal transactions (FY2023–2026), refreshed daily and reconciled against USAspending"
       ],
       "stack": [
+        "Python",
+        "FastAPI",
         "DuckDB",
         "dbt",
-        "FastAPI",
         "Next.js",
         "MCP",
-        "AWS"
+        "Claude",
+        "AWS",
+        "Cloudflare"
       ]
     },
     {
